@@ -5,6 +5,11 @@
     <form action="{{ route('posts.update', $post) }}" method="POST">
         @csrf
         @method('PUT')
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $post->title) }}" required>

@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit']);
 Route::resource('/posts', App\Http\Controllers\PostController::class);

@@ -52,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -60,7 +60,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.show', compact('post'));
+        
+        $this->authorize('update', $post);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -68,6 +70,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -77,7 +80,7 @@ class PostController extends Controller
         $post->body = $validatedData['body'];
         $post->save();
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
+        return back()->with('success', 'Post updated successfully!');
     }
 
     /**
@@ -85,6 +88,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }

@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    function __construct()
     {
-        $comments = Comment::all();
-
-        return view('comments.index', compact('comments'));
+        $this->middleware('auth');
     }
 
     /**
@@ -37,47 +32,11 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->comment = $validatedData['comment'];
         $comment->user_id = auth()->user()->id;
-        $comment->commentable_type = Post::class; // Change to the appropriate model
-        $comment->commentable_id = $request->input('post_id'); // Change to the appropriate input name
-        $comment->parent_id = $request->input('parent_id'); // Change to the appropriate input name
+        $comment->commentable_type = 'App\Models\Post';
+        $comment->commentable_id = $request->input('post_id');
         $comment->save();
 
-        return redirect()->route('comments.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        return view('comments.show', compact('comment'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        $this->authorize('update', $comment);
-
-        return view('comments.edit', compact('comment'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Comment $comment)
-    {
-        $this->authorize('update', $comment);
-
-        $validatedData = $request->validate([
-            'comment' => 'required',
-        ]);
-
-        $comment->comment = $validatedData['comment'];
-        $comment->save();
-
-        return redirect()->route('comments.show', $comment);
+        return back()->with('success', 'Your comment has been saved.');
     }
 
     /**
@@ -89,6 +48,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect()->route('comments.index');
+        return back()->with('success', 'Your comment has been deleted.');
     }
 }

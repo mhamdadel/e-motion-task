@@ -19,5 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/posts/{id}/edit', [App\Http\Controllers\PostController::class, 'edit']);
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name(('profile'));
 Route::resource('/posts', App\Http\Controllers\PostController::class);
+Route::resource('/comments', App\Http\Controllers\CommentController::class)->only(['create', 'store', 'destroy']);

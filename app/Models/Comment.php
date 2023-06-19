@@ -9,18 +9,18 @@ class Comment extends Model
 {
     use HasFactory;
 
+    public function user() 
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function commentable()
     {
         return $this->morphTo();
     }
 
-    public function parent()
+    public function replies()
     {
-        return $this->belongsTo(Comment::class, 'parent_id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->morphMany("App\Model\Comment", 'commentable');
     }
 }

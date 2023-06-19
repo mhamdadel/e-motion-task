@@ -2,6 +2,11 @@
 
 @section('content')
     <h1>Create Post</h1>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
         <div class="form-group">

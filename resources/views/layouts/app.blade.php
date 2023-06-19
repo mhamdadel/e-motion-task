@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="{{ route('posts.index') }}">{{ __('posts') }}</a>
                             </li>
                         @endif
-                        @if (Route::has('profile'))
+                        @if (Route::has('profile') && Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('profile') }}">{{ __('Profile') }}</a>
                             </li>

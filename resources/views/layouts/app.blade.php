@@ -30,7 +30,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Route::has('posts.index'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('posts.index') }}">{{ __('posts') }}</a>
+                            </li>
+                        @endif
+                        @if (Route::has('profile'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('profile') }}">{{ __('Profile') }}</a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

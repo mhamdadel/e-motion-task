@@ -44,4 +44,4 @@ The users table stores user information, including their username, email, and pa
 The posts table stores post information, including the post title, content, and the user who created the post.
 The comments table stores comment information, including the comment content, the user who made the comment, and the post the comment relates to.
 Libraries and Packages
-The application uses Laravel's built-in authentication system and Eloquent ORM. No additional libraries or packages are used beyond Laravel's built-in ones.
+The application uses Laravel's built-in authentication system and Eloquent ORM. No additional libraries or packages are used beyond Laravel's built-in ones.# laravrel_motionagency
